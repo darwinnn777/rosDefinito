@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Loader2, Plus, ShoppingCart, AlertCircle } from 'lucide-react';
-import { supabase } from '../../lib/supabase';
+import { supabase, isConfigured } from '../../lib/supabase';
 import { useConfig } from '../../contexts/ConfigContext';
 import { type Product } from '../../types';
 
@@ -13,6 +13,10 @@ export const ProductCatalog = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
+                if (!isConfigured) {
+                    throw new Error("Faltan las variables de entorno en Vercel (Settings -> Environment Variables).");
+                }
+
                 setLoading(true);
                 const { data, error } = await supabase
                     .from('productos')
