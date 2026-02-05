@@ -50,8 +50,16 @@ export const ProductCatalog = () => {
             <div className="h-full w-full flex flex-col items-center justify-center p-8 text-red-500 text-center">
                 <AlertCircle className="h-8 w-8 mb-2" />
                 <p className="font-medium">Error al cargar productos</p>
-                <p className="text-xs mt-1 text-gray-400">{error}</p>
-                <p className="text-xs mt-4 text-gray-500">Asegúrate de configurar VITE_SUPABASE_URL</p>
+                <p className="text-xs mt-1 text-gray-400 max-w-[200px] break-words">{error}</p>
+                <div className="mt-4 space-y-2">
+                    <p className="text-xs text-gray-500">¿Has configurado el archivo .env?</p>
+                    <button 
+                        onClick={() => window.location.reload()}
+                        className="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded hover:bg-red-100 transition-colors font-medium"
+                    >
+                        Reintentar / Recargar
+                    </button>
+                </div>
             </div>
         );
     }
